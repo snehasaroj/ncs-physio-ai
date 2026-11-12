@@ -5,44 +5,23 @@ from common import init_state
 init_state()
 
 st.title("NCS-Physio AI")
-st.subheader("Electrophysiological assessment of cervical pain, with LLM + RAG interpretation and an AI-evaluation benchmark")
+st.write("A tool for recording, reporting and analysing upper-limb nerve conduction studies, with AI-assisted interpretation.")
 
+st.subheader("What it can do")
 st.markdown("""
-This app grew out of my MD (Physiology) thesis, **"Electrophysiological Assessment of Cervical Pain: A Cross-sectional
-Study"** (Rajiv Gandhi Medical College, Thane; guide: Dr. Swapnali Kadam). In the study I assess the median, ulnar and
-radial nerves (latency, amplitude, conduction velocity and F-wave latency) in 150+ patients, together with the
-**Neck Disability Index**, the **IPAQ** and **body composition analysis**.
-
-The public version runs on a **synthetic cohort** that I generated from the underlying physiology. It contains no real
-patient data, and because the correct diagnosis of every case is known, it doubles as a benchmark.
+- Record nerve conduction findings for the median, ulnar and radial nerves, along with the Neck Disability Index, IPAQ and body composition
+- Flag abnormal values and suggest an interpretation
+- Generate a PDF report for each patient
+- Analyse a whole group of patients with charts and basic statistics
+- Compare AI-generated interpretations with the measured data
 """)
 
-c1, c2, c3 = st.columns(3)
-with c1:
-    st.markdown("#### 🩺 Clinical workflow")
-    st.markdown("- **Patient entry**: NCS, NDI, IPAQ, body composition\n"
-                "- Rule-based interpretation you can audit\n- A4 **PDF report**")
-with c2:
-    st.markdown("#### 📊 Data analysis")
-    st.markdown("- Analysis-ready table with derived scores\n- Spearman correlations, Mann-Whitney / Kruskal-Wallis, "
-                "chi-square, **Benjamini-Hochberg FDR** correction\n- Interactive Plotly charts")
-with c3:
-    st.markdown("#### 🤖 LLM, RAG and AI evaluation")
-    st.markdown("- **RAG**: a BM25 retriever over a curated electrophysiology knowledge base, queried from the case's "
-                "abnormal findings\n- An LLM (Gemini / OpenAI / Claude) writes the interpretation with citations\n"
-                "- An **automatic critic** checks it: wrong pattern, missed or invented abnormalities, "
-                "hallucinated numbers, invalid citations, physiology errors\n"
-                "- A **benchmark** compares RAG against no-RAG and against rule-based and trivial baselines")
-
-st.divider()
+st.subheader("Who can benefit")
 st.markdown("""
-**How the interpretation logic works (physiology first):**
-amplitude reflects the number of conducting axons; latency and velocity reflect myelin. Cervical root lesions are
-*pre-ganglionic*: the dorsal root ganglion is spared, so **SNAPs stay normal** even with sensory symptoms. A low SNAP
-therefore points away from radiculopathy, towards an entrapment, a plexopathy or a polyneuropathy. Each rule in
-`ncs_interpret.py` is written so that a physiologist can check it.
-
-Use the pages in the sidebar. To try the AI pages, add an API key under *Settings → Secrets* (a free Google Gemini key
-works).
+- **Physiology and neurology residents** working on NCS-based research
+- **Neurophysiology labs** that need structured reporting
+- **Teachers and students** learning how NCS findings are interpreted
+- **Researchers** studying how accurately AI interprets clinical data
 """)
-st.caption("Research and education tool. Not for clinical decision-making without verification by a qualified clinician.")
+
+st.caption("Demo data is synthetic and contains no real patient information. For research and teaching only, not for clinical diagnosis.")
